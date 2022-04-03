@@ -271,6 +271,7 @@ public class Exercices {
 
 	}
 
+	//Angel Garcia😁👍
 	public static boolean isTriangle(int n) {
 		int sum = 0; // 1
 
@@ -283,13 +284,11 @@ public class Exercices {
 				return true;
 		} // O(n)
 
-		// Implementacion "gallardo xd"
 		for (int i = 1; i <= n; i++) {
 			sum += i;
 			if (sum == n)
 				return true;
 		}
-
 		return false;
 	}
 
@@ -329,7 +328,7 @@ public class Exercices {
 
 		// algoritmo4(2, 2);
 		// System.out.println(haceAlgo(array2, array2.length - 1));
-		// System.out.println(isTriangle(3));
+		 System.out.println(isTriangle(10));
 
 	}
 }
