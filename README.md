@@ -1,2 +1,2 @@
 # Ejercicios-A-Algoritmos
-para pelos 
+Están todos los ejercicios del word "Calculo de complejidades 0" con su coste respectivo :)
