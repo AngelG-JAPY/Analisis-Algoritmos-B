@@ -1,3 +1,4 @@
+import java.security.cert.X509CRL;
 
 public class Exercices {
 
@@ -36,12 +37,12 @@ public class Exercices {
 	}
 
 	// Exercice 3
-	public static int appearancesOfX(int[] array, int length, int target) {
+	public static int appearancesOfX(int[] array, int length, int x) {
 		int counter = 0; // 1
 		int i = 0; // 1
 
 		while (i < length) { // 1
-			if (array[i] == target) // 2
+			if (array[i] == x) // 2
 				counter = (counter + 1); // 2
 			i = (i + 1); // 2
 		}
@@ -49,7 +50,7 @@ public class Exercices {
 		return counter; // 1
 
 		/*
-		 * T(n) = 4 + n(5)
+		 * T(n) = 4 + n(1+2+max(2,2))
 		 * T(n) = 4 + 5n
 		 * O(n)
 		 */
@@ -77,21 +78,25 @@ public class Exercices {
 	// Exercice 5
 	public static int sumOfElements(int[][] matrix, int length) {
 		int sum = 0; // 1
-		int i = 0, j = 0; // 2
+		int i = 0, j; // 1
+
 		while (i < length) { // 1
+			j = 0; // 1
+
 			while (j < length) { // 1
 				sum = sum + matrix[i][j]; // 4
 				j = (j + 1); // 2
 			}
-			j = 0; // 1
+
 			i = (i + 1); // 2
+
 		}
 		return sum; // 1
 
 		/**
-		 * T(n) = 5 + n(5+(n(7)))
-		 * T(n) = 5 + n(5+7n)
-		 * T(n) = 5 + 5n + 7n^2
+		 * T(n) = 4 + n(5+(n(7)))
+		 * T(n) = 4 + n(5+7n)
+		 * T(n) = 4 + 5n + 7n^2
 		 * O(n^2)
 		 */
 	}
@@ -114,10 +119,14 @@ public class Exercices {
 		}
 
 		return true; // 1
-
+		/**
+		 * T(n) = 4n^2 + 3n - 3
+		 * O(n^2)
+		 */
 	}
 
 	// Exercice 7
+	// Suponemos que la matriz siempre es de n*n
 	public static int mainDiagonal(int[][] matrix, int length) {
 		int sum = 0; // 1
 		int i = 0; // 1
@@ -141,14 +150,14 @@ public class Exercices {
 		int i = length; // 1
 
 		while (i >= 0) { // 1
-			sum = sum + matrix[i][length - i]; // 5
+			sum = sum + matrix[i][length - i - 1]; // 6
 			i = (i - 1); // 1
 		}
 
 		return sum;// 1
 		/**
-		 * T(n) = 4 + n(7)
-		 * T(n) = 7n + 4
+		 * T(n) = 4 + n(8)
+		 * T(n) = 8n + 4
 		 * O(n)
 		 */
 	}
@@ -232,10 +241,10 @@ public class Exercices {
 		}
 		return; // 1
 		/**
-		 * T(n) = 7 + n(2+n(4+n(5)))
-		 * T(n) = 7 + n(1+n(4+5n))
-		 * T(n) = 7 + n(1+4n+5n^2)
-		 * T(n) = 7 + n+4n^2 + 5n^3
+		 * T(n) = 5 + n(4+n(4+n(5)))
+		 * T(n) = 5 + n(4+n(4+5n))
+		 * T(n) = 5 + n(4+4n+5n^2)
+		 * T(n) = 5 + 4n + 4n^2 + 5n^3
 		 * O(n^3)
 		 */
 	}
@@ -263,7 +272,18 @@ public class Exercices {
 	}
 
 	public static boolean isTriangle(int n) {
-		int sum = 0;
+		int sum = 0; // 1
+
+		// Suponiendo que tenga coste 1 el Math.sqrt()
+		int xRepeticiones = (-1 + (int) (Math.sqrt(1 + (8 * n)))) / 2; // 7
+
+		for (int i = 1; i <= xRepeticiones; i++) {
+			sum += i;
+			if (sum == n)
+				return true;
+		} // O(n)
+
+		// Implementacion "gallardo xd"
 		for (int i = 1; i <= n; i++) {
 			sum += i;
 			if (sum == n)
@@ -277,7 +297,8 @@ public class Exercices {
 		// System.out.println(pow(5, (byte)5));
 		// System.out.println(residue(4, 2));
 
-		// int[] array = { 5, 10, 2, 5, 78, 5, 8, 8, 11 };
+		// int[] array = { 5, 10, 2, 5, 78, 5, 8, 8, 11, 10, 25, 69, 30, 154, 15 };
+		// int [] array = {5,5,5,5,5};
 		// int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
 		/*
 		 * int[][] matrix = {
@@ -286,12 +307,12 @@ public class Exercices {
 		 * { 1, 6, 2, 2 },
 		 * { 2, 3, 2, 2 } };
 		 */
-		// System.out.println(appearancesOfX(array, array.length, 20));
+		// System.out.println(appearancesOfX(array, array.length, 5));
 		// System.out.println(sumOfEvenPositions(array, array.length));
 		// System.out.println(sumOfElements(matrix, matrix.length));
 		// System.out.println(symmetricMatrix(matrix, matrix.length));
 		// System.out.println(mainDiagonal(matrix, matrix.length));
-		// System.out.println(secondaryDiagonal(matrix, matrix.length-1));
+		// System.out.println(secondaryDiagonal(matrix, matrix.length));
 		/*
 		 * int [] invert = invertArray(array, array.length);
 		 * for(int i: invert){
@@ -308,7 +329,7 @@ public class Exercices {
 
 		// algoritmo4(2, 2);
 		// System.out.println(haceAlgo(array2, array2.length - 1));
-		System.out.println(isTriangle(15));
+		// System.out.println(isTriangle(3));
 
 	}
 }
