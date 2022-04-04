@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javax.lang.model.element.Element;
 
 /**
@@ -57,24 +59,43 @@ public class Recurrencia {
 
     // iv. Encontrar el primer índice tal que A[i] sea igual a i
     public static int firstMatch(int array[], int length, int position) {
-        if(position == length) return -1;
-        if(position == array[position]) return position;
-        return  firstMatch(array, length, position+1);
+        if (position == length)
+            return -1;
+        if (position == array[position])
+            return position;
+        return firstMatch(array, length, position + 1);
     }
 
-    //v.	Con otro array B de tamaño n, construir un tercer array que contenga 
-    //la intersección de los dos arrays originales (elementos comunes).
+    // v. Con otro array B de tamaño n, construir un tercer array que contenga
+    // la intersección de los dos arrays originales (elementos comunes).
+    public static ArrayList<Integer> recursiveIntersection(int[] A, int[] B, int lengthA, int lengthB, int i, int j,
+            ArrayList<Integer> l) {
+        if (i < lengthA) {
+            if (j < lengthB) {
+                if (A[i] == B[j])
+                    l.add(B[j]);
+                return recursiveIntersection(A, B, lengthA, lengthB, i, j + 1, l);
+            }
+            j = 0;
+            recursiveIntersection(A, B, lengthA, lengthB, i + 1, j, l);
+        }
+        return l;
+    }
+
 
     public static void main(String[] args) {
         // System.out.println(recursiveAdd(5, 2));
         // System.out.println(recursiveDivision(15, 4));
-        //int[] array = { 5, 10, 2, 5, 78, 5, 8, 250, 11, 10, 25, 69, 30, 154, 15 };
+        // int[] array = { 5, 10, 2, 5, 78, 5, 8, 250, 11, 10, 25, 69, 30, 154, 15 };
         // System.out.println(recursiveSumOfElements(array, array.length));
         // System.out.println(largestElement(array, array[0], 0, array.length));
         // int a[] = recursiveInvertArray(array, array.length , 0);
         // for(int i: a ) System.out.print(i+", ");
         // int array2[] = { 3, 5, 5, 4, 4 };
         // System.out.println(firstMatch(array2, array2.length, 0));
-
+        int a[] = { 1, 2, 3, 5, 7 };
+        int b[] = { 5, 3, 2 };
+        // System.out.println(lol(a, b));
+        System.out.println(recursiveIntersection(a, b, a.length, b.length, 0, 0, new ArrayList<Integer>()));
     }
 }
