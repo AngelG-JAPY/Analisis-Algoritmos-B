@@ -84,26 +84,26 @@ public class Recurrencia {
     public static int largestElement(int array[], int element, int length) {
         if (length == 0)
             return element;
-        if (element <= array[length-1])
-            element = array[length-1];
-        return largestElement(array,element,length-1);
+        if (element <= array[length - 1])
+            element = array[length - 1];
+        return largestElement(array, element, length - 1);
         /*
-         *         --------------
+         * --------------
          * T(n) = | c, n = 0
-         *        | T(n-1) + c
-         *        ---------------
+         * | T(n-1) + c
+         * ---------------
          * 
          * T(n) = T(n-1) + c
-         *      = (T(n-2) + c) + c
-         *      = (T(n-3) + c) + 2c
-         *      = (T(n-4) + c) + 3c
-         *      = T(n-4) + 4c
-         *      = ................
-         *      = T(n-(n-1)) + (n-1)c
-         *      = T(1) + (n-1)c
-         *      = c + cn - c
-         *      T(n) = cn
-         *      O(n)
+         * = (T(n-2) + c) + c
+         * = (T(n-3) + c) + 2c
+         * = (T(n-4) + c) + 3c
+         * = T(n-4) + 4c
+         * = ................
+         * = T(n-(n-1)) + (n-1)c
+         * = T(1) + (n-1)c
+         * = c + cn - c
+         * T(n) = cn
+         * O(n)
          */
     }
 
@@ -123,21 +123,21 @@ public class Recurrencia {
             recursiveInvertArray(A, length, position + 1);
         }
         return A;
-         /*
-         *         --------------
+        /*
+         * --------------
          * T(n) = | c, n < n/2
-         *        | T(n+1) + c
-         *        ---------------
+         * | T(n+1) + c
+         * ---------------
          * 
          * T(n) = T(n+1) + c
-         *      = (T(n+2) + c) + c
-         *      = (T(n+3) + c) + 2c
-         *      = (T(n+4) + c) + 3c
-         *      = T(n+4) + 4c
-         *      = ................
-         *      = T(n+(n+1)) + (n+1)c
-         *      pero n < n/2 podemos decir que n == n
-         *      = T(n) + (n+1)c
+         * = (T(n+2) + c) + c
+         * = (T(n+3) + c) + 2c
+         * = (T(n+4) + c) + 3c
+         * = T(n+4) + 4c
+         * = ................
+         * = T(n+(n+1)) + (n+1)c
+         * pero n < n/2 podemos decir que n == n
+         * = T(n) + (n+1)c
          * T(n) = c + (n+1)c
          * T(n) = c + cn + c
          * T(n) = cn + 2c
@@ -161,8 +161,9 @@ public class Recurrencia {
             ArrayList<Integer> l) {
         if (i < lengthA) {
             if (j < lengthB) {
-                if (A[i] == B[j])
+                if (A[i] == B[j]) {
                     l.add(B[j]);
+                }
                 return recursiveIntersection(A, B, lengthA, lengthB, i, j + 1, l);
             }
             j = 0;
@@ -171,20 +172,40 @@ public class Recurrencia {
         return l;
     }
 
+    public static ArrayList<Integer> recursiveIntersection2(int[] A, int[] B, int lengthA, int lengthB, int i, int j,
+            ArrayList<Integer> l) {
+
+        if (i < lengthA) {
+            if (j < lengthB) {
+                if (A[i] == B[j]) {
+                    l.add(B[j]);
+                }
+                recursiveIntersection2(A, B, lengthA, lengthB, i, j + 1, l);
+
+            } else {
+                j = 0;
+                recursiveIntersection2(A, B, lengthA, lengthB, i + 1, j, l);
+            }
+
+            return l;
+        }
+
+        return null;
+    }
+
     public static void main(String[] args) {
         // System.out.println(recursiveAdd(5, 2));
         // System.out.println(recursiveDivision(15, 4));
         int[] array = { 5, 10, 2, 5, 78, 5, 8, 250, 11, 10, 25, 69, 30, 154, 15 };
         // System.out.println(recursiveSumOfElements(array, array.length));
-        System.out.println(largestElement(array, array[0],array.length));
+        System.out.println(largestElement(array, array[0], array.length));
         // int a[] = recursiveInvertArray(array, array.length , 0);
         // for(int i: a ) System.out.print(i+", ");
         // int array2[] = { 3, 5, 5, 4, 4 };
         // System.out.println(firstMatch(array2, array2.length, 0));
-        // int a[] = { 1, 2, 3, 5, 7 };
-        // int b[] = { 5, 3, 2 };
+        int a[] = { 1, 2, 3, 5, 7 };
+        int b[] = { 5, 3, 2 };
         // // System.out.println(lol(a, b));
-        // System.out.println(recursiveIntersection(a, b, a.length, b.length, 0, 0, new
-        // ArrayList<Integer>()));
+        System.out.println(recursiveIntersection2(a, b, a.length, b.length, 0, 0, new ArrayList<Integer>()));
     }
 }
