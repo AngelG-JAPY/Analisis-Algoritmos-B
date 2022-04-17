@@ -193,19 +193,49 @@ public class Recurrencia {
         return null;
     }
 
+    public static int binary(int n) {
+        int multiplicador = 1;
+        int binario = 0;
+        while (n > 0) {
+            binario = binario + n % 2 * multiplicador;
+            n = n / 2;
+            multiplicador = multiplicador * 10;
+        }
+        return binario;
+
+    }
+
+    public static int powRecursive(int base, int exp) {
+        if(exp == 0) return 1;
+        if(base == 1) return base;
+
+        int aux = powRecursive(base, exp/2);
+
+        if(exp %2 == 0) return aux*aux;
+        return aux*aux*base;
+
+    }
+
     public static void main(String[] args) {
         // System.out.println(recursiveAdd(5, 2));
         // System.out.println(recursiveDivision(15, 4));
-        int[] array = { 5, 10, 2, 5, 78, 5, 8, 250, 11, 10, 25, 69, 30, 154, 15 };
+        // int[] array = { 5, 10, 2, 5, 78, 5, 8, 250, 11, 10, 25, 69, 30, 154, 15 };
         // System.out.println(recursiveSumOfElements(array, array.length));
-        System.out.println(largestElement(array, array[0], array.length));
+        // System.out.println(largestElement(array, array[0], array.length));
         // int a[] = recursiveInvertArray(array, array.length , 0);
         // for(int i: a ) System.out.print(i+", ");
         // int array2[] = { 3, 5, 5, 4, 4 };
         // System.out.println(firstMatch(array2, array2.length, 0));
-        int a[] = { 1, 2, 3, 5, 7 };
-        int b[] = { 5, 3, 2 };
-        // // System.out.println(lol(a, b));
-        System.out.println(recursiveIntersection2(a, b, a.length, b.length, 0, 0, new ArrayList<Integer>()));
+        // int a[] = { 1, 2, 3, 5, 7 };
+        // int b[] = { 5, 3, 2 };
+        // // // System.out.println(lol(a, b));
+        // System.out.println(recursiveIntersection2(a, b, a.length, b.length, 0, 0, new
+        // ArrayList<Integer>()));
+
+        // int a = 5, b= 3, c= 1;
+
+        //System.out.println(binary(9));
+        System.out.println(powRecursive(2, 5));
+        
     }
 }

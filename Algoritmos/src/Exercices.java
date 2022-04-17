@@ -7,7 +7,7 @@ public class Exercices {
 		int pow = 1; // 1
 		int i = 1; // 1
 		while (i <= exp) { // 1
-			pow = pow * exp; // 2
+			pow = pow * base; // 2
 			i = i + 1; // 2
 		}
 		return pow; // 1
@@ -271,7 +271,7 @@ public class Exercices {
 
 	}
 
-	//Angel Garcia😁👍
+	// Angel Garcia😁👍
 	public static boolean isTriangle(int n) {
 		int sum = 0; // 1
 
@@ -291,6 +291,27 @@ public class Exercices {
 		}
 		return false;
 	}
+
+	public static int euclides(int a, int b) {
+		if (b == 0)
+			return a;
+		return euclides(b, a % b);
+	}
+
+	public static int pelosAlgoritmo(int n) {
+		int p = 0;
+		int contador = 0;
+		for (int i = 1; i <= n; i++) {
+			p = i*i;
+			for (int j = 1; j <= p; j++) {
+				contador ++;
+			}
+			contador++;
+		}
+		return contador;
+	}
+
+
 
 	public static void main(String[] args) throws Exception {
 		// System.out.println(pow(5, (byte)5));
@@ -328,7 +349,8 @@ public class Exercices {
 
 		// algoritmo4(2, 2);
 		// System.out.println(haceAlgo(array2, array2.length - 1));
-		 System.out.println(isTriangle(10));
-
+		// System.out.println(isTriangle(10));
+		//System.out.println(euclides(6, 6));
+		System.out.println(pelosAlgoritmo(5));
 	}
 }
